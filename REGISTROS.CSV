@@ -1,0 +1,25 @@
+import csv
+import os
+from pathlib import Path
+
+
+nome = input("Digite seu nome: ")
+telefone = input("Digite seu telefone: ")
+email = input("Digite seu email: ")
+
+
+script_folder = Path(__file__).parent
+arquivo = script_folder / "cadastros.csv"
+
+
+existe = arquivo.exists()
+
+
+with open(arquivo, "w", newline='', encoding="utf-8") as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=['Nome', 'Telefone', 'Email'])
+    if not existe: 
+        
+        writer.writeheader()
+    writer.writerow({'Nome': nome, 'Telefone': telefone, 'Email': email})
+
+print("Cadastro realizado com sucesso!")
